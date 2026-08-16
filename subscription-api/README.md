@@ -56,7 +56,7 @@ subscription-api/
 
 ### 1. Prasyarat
 
-- Node.js (v18+ LTS)
+- Node.js (v20.19.0+ / v22.13.0+ / v24+)
 - npm / yarn
 
 ### 2. Setup Environment Variables
