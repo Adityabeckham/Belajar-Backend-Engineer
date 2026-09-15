@@ -1,9 +1,17 @@
 const env = require("./config/env");
 const logger = require("./utils/logger");
 const app = require("./app");
+const pool = require("./config/database");
 
-const server = app.listen(env.PORT, () => {
+const server = app.listen(env.PORT, async () => {
   logger.info(`Server running in ${env.NODE_ENV} mode on port ${env.PORT}`);
+  try {
+    const result = await pool.query("SELECT NOW()", []);
+    logger.info(`Database connected: ${result.rows[0].now}`);
+  } catch (error) {
+    logger.error("Database connection failed", error);
+    process.exit(1);
+  }
 });
 
 const handleShutdown = (signal) => {
